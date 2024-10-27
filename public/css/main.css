@@ -1,77 +1,190 @@
-*{margin: 0; padding: 0; box-sizing: border-box;}
-body {
-    font-family: Arial, sans-serif;
-    background: var(--pinkLight);
-    color: var(--font);
-    padding: 20px;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: Arial, sans-serif;
-    background: var(--pinkLight);
-    background-size: cover;
-    color: var(--font);
-    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    background: var(--background);
+    color: var(--grayDark);
+    padding: 0;
+}
+
+.task-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.task-list li {
+    margin: 10px 0;
+    position: relative;
+    padding: 10px 0;
+}
+
+.task-item span {
+    width: 100%;
+    padding-left: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table tr td {
+    position: relative;
+}
+
+.task-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.task-cell span {
     text-align: center;
+    width: 100%;
 }
+
+.fa-trash {
+    transition: color 0.3s ease;
+    position: absolute;
+    left: 10px;
+    color: var(--accent);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.fa-trash:hover {
+    color: var(--accentDark);
+}
+
+table tr:hover .fa-trash, .task-list li:hover .fa-trash{
+    opacity: 1;
+}
+
 .container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 800px;
+    max-width: 900px;
     margin: auto;
-    box-shadow: 0 4px 8px var(--greenLight);
+    padding: 30px;
 }
-.header {
+
+.navbar {
+    background: var(--grayDark);
+    padding: 12px 0;
+    text-align: right;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
+}
+.navbar a {
+    color: var(--body);
+    text-decoration: none;
+    margin: 0 20px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: var(--accent);
+}
+
+.section {
+    margin-bottom: 20px;
+    background: var(--body);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--border);
+}
+
+#header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 0 0 8px 8px;
 }
-.header h1 {
-    font-size: 2em;
+
+#header h1 {
+    font-size: 1.8em;
     margin: 0;
 }
+
 .clock {
-    font-size: 3em;
-    font-weight: bold;
+    font-size: 2.5em;
+    font-weight: 500;
+    color: var(--grayDark);
+    /*mask-image: url("../image/grit.png");*/
 }
-.reminder {
-    background: var(--greenLight);
-    color: var(--green);
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 8px;
-    font-weight: bold;
-}
+
 .task-list {
     list-style: none;
     padding: 0;
     text-align: left;
 }
+
 .task-list li {
-    padding: 10px;
-    border-bottom: 1px solid var(--greenLight);
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 25px;
 }
-table, th, td {
-    border: 1px solid var(--pink);
-    padding: 10px;
+
+table, th {
+    border: 1px solid var(--border);
+    padding: 10px 0;
     text-align: center;
 }
-th {
-    background: var(--pinkLight)
+
+table, td {
+    border: 1px solid var(--border);
+    height: 40px;
+    padding: 0;
+    text-align: center;
 }
+
+th {
+    background: var(--body);
+    font-weight: 500;
+}
+
 .progress {
-    height: 20px;
-    background: var(--greenLight);
-    border-radius: 5px;
+    height: 8px;
+    margin: 0 12px;
+    background: var(--border);
+    border-radius: 4px;
     overflow: hidden;
 }
+
 .progress-bar {
     height: 100%;
-    background: var(--pinkDark);
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+table td label {
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    line-height: 40px;
+    position: relative;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--grayDark);
+    border-radius: 4px;
+    background: transparent;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    appearance: none;
+}
+
+input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
 }

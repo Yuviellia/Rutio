@@ -1,3 +1,12 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--background);
+    color: var(--grayDark);
+    padding: 0;
+}
+
 div#login, div#login *{
     margin: 0; 
     padding: 0; 
@@ -9,7 +18,7 @@ div#login {
     background: white;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px var(--greenLight);
+    box-shadow: 0 4px 6px var(--border);
     max-width: 500px;
     width: 100%;
     text-align: center;
@@ -18,7 +27,7 @@ div#login {
 div#login h1 {
     font-size: 2em;
     margin-bottom: 20px;
-    color: var(--green);
+    color: var(--accent);
 }
 div#login p {
     font-size: 1em;
@@ -31,24 +40,24 @@ div#login button {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid var(--greenLight);
+    border: 1px solid var(--border);
     border-radius: 5px;
     font-size: 1em;
     outline: none;
 }
 div#login input[type="email"]:focus,
 div#login input[type="password"]:focus {
-    border-color: var(--pink);
+    border-color: var(--accent);
 }
 div#login button {
-    background: var(--pink);
+    background: var(--accent);
     color: white;
     border: none;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 div#login button:hover {
-    background: var(--pinkDark);
+    background: var(--accentDark);
 }
 div#login .footer {
     margin-top: 20px;
@@ -56,7 +65,7 @@ div#login .footer {
     color: #555;
 }
 div#login .footer a {
-    color: var(--green);
+    color: var(--accent);
     text-decoration: none;
 }
 
