@@ -1,0 +1,37 @@
+services: 
+  web:
+    build: 
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/app/
+    links:
+      - php
+
+  php:
+    build: 
+      context: .
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - .:/app/
+    links:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: rutio_database
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./certs:/etc/ssl/cert
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:
