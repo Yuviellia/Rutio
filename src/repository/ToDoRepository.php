@@ -18,12 +18,15 @@ class ToDoRepository extends Repository {
     }
 
     public function addSingleToDo($f): void {
+        session_start();
+        if (!isset($_SESSION['id'])) { header('Location: /login'); }
+
         $stmt = $this->database->connect()->prepare('
             INSERT INTO todo (iduser, task, createdat)
             VALUES (?, ?, ?)
         ');
 
-        $user = 1;
+        $user = $_SESSION['id'];
         $currentDate = date('Y-m-d H:i:s');
         $line = trim($f);
         if (!empty($line)) {
@@ -31,17 +34,23 @@ class ToDoRepository extends Repository {
         }
     }
     public function deleteSingleToDo($f): void {
+        session_start();
+        if (!isset($_SESSION['id'])) { header('Location: /login'); }
+
         $stmt = $this->database->connect()->prepare('
             DELETE FROM todo
             WHERE id = ? AND iduser = ?
         ');
 
-        $user = 1;
+        $user = $_SESSION['id'];
 
         $stmt->execute([$f, $user]);
     }
 
     public function addToDo(ToDoFile $toDo): void {
+        session_start();
+        if (!isset($_SESSION['id'])) { header('Location: /login'); }
+
         $stmt = $this->database->connect()->prepare('
             INSERT INTO todo (iduser, task, createdat)
             VALUES (?, ?, ?)
@@ -51,7 +60,7 @@ class ToDoRepository extends Repository {
             DELETE FROM todo WHERE iduser = ?
         ');
 
-        $user = 1;
+        $user = $_SESSION['id'];
         $filePath = __DIR__."/../../public/upload/".$toDo->getFile();
 
 
@@ -72,10 +81,13 @@ class ToDoRepository extends Repository {
     }
 
     public function getToDos(): array{
+        session_start();
+        if (!isset($_SESSION['id'])) { header('Location: /login'); }
+
         $stmt = $this->database->connect()->prepare('
             SELECT id, task FROM todo WHERE iduser = ? ORDER BY createdat ASC
         ');
-        $stmt->execute([1]);
+        $stmt->execute([$_SESSION['id']]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

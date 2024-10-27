@@ -6,7 +6,7 @@
     <link href="/public/css/variables.css" type="text/css" rel="stylesheet">
     <link href="/public/css/main.css" type="text/css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/bf11c142bf.js" crossorigin="anonymous"></script>
-    <title>Rutio | Dashboard</title>
+    <title>Rutio | To Do List</title>
     </style>
 </head>
 <body>
@@ -15,7 +15,7 @@
             <a href="/todo">To Do List</a>
             <a href="/stats">Stats</a>
             <a href="/dashboard">Habit Tracker</a>
-            <a href="">Logout</a>
+            <a href="/logout">Logout</a>
         </nav>
 
         <div id="header" class="section">

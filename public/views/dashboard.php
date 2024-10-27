@@ -15,7 +15,7 @@
             <a href="/todo">To Do List</a>
             <a href="/stats">Stats</a>
             <a href="/dashboard">Habit Tracker</a>
-            <a href="">Logout</a>
+            <a href="/logout">Logout</a>
         </nav>
 
         <div id="header" class="section">
@@ -71,7 +71,8 @@
                             if (isset($marks[$tag["id"]])) {
                                 $i = 0;
                                 foreach ($marks[$tag["id"]] as $entry) {
-                                    $i++;
+                                    $entryDate = new DateTime($entry["date"]);
+                                    if ($entryDate >= $startDate && $entryDate < (clone $startDate)->modify('+7days')) $i++;
                                     if ($entry["date"] === $currentDate) {
                                         $isChecked = true;
                                         break;

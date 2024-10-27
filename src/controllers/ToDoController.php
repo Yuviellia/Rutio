@@ -17,6 +17,12 @@ class ToDoController extends AppController {
     }
 
     public function todo(){
+        session_start();
+        if (!isset($_SESSION['id'])) {
+            header('Location: /login');
+            exit();
+        }
+
         $toDo = $this->toDoRepository->getToDos();
         $this->render('todo', ['toDo' => $toDo]);
     }
