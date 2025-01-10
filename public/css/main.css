@@ -1,0 +1,77 @@
+*{margin: 0; padding: 0; box-sizing: border-box;}
+body {
+    font-family: Arial, sans-serif;
+    background: var(--pinkLight);
+    color: var(--font);
+    padding: 20px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--pinkLight);
+    background-size: cover;
+    color: var(--font);
+    padding: 20px;
+    text-align: center;
+}
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 0 4px 8px var(--greenLight);
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header h1 {
+    font-size: 2em;
+    margin: 0;
+}
+.clock {
+    font-size: 3em;
+    font-weight: bold;
+}
+.reminder {
+    background: var(--greenLight);
+    color: var(--green);
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-weight: bold;
+}
+.task-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+.task-list li {
+    padding: 10px;
+    border-bottom: 1px solid var(--greenLight);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+table, th, td {
+    border: 1px solid var(--pink);
+    padding: 10px;
+    text-align: center;
+}
+th {
+    background: var(--pinkLight)
+}
+.progress {
+    height: 20px;
+    background: var(--greenLight);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.progress-bar {
+    height: 100%;
+    background: var(--pinkDark);
+}

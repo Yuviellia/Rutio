@@ -1,0 +1,65 @@
+div#login, div#login *{
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: var(--font);
+}
+div#login {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--greenLight);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    margin: 30px auto;
+}
+div#login h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: var(--green);
+}
+div#login p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 20px;
+}
+div#login input[type="email"],
+div#login input[type="password"], 
+div#login button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--greenLight);
+    border-radius: 5px;
+    font-size: 1em;
+    outline: none;
+}
+div#login input[type="email"]:focus,
+div#login input[type="password"]:focus {
+    border-color: var(--pink);
+}
+div#login button {
+    background: var(--pink);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+div#login button:hover {
+    background: var(--pinkDark);
+}
+div#login .footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #555;
+}
+div#login .footer a {
+    color: var(--green);
+    text-decoration: none;
+}
+
+div#login .footer a:hover {
+    text-decoration: underline;
+}

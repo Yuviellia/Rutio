@@ -1,0 +1,17 @@
+
+:root {
+    --font: #333;
+    --fontAccent: #5E826B;/*#95757E;*/
+    --main: #FFADBC;
+    --mainDark: #F193A1;
+    --mainLight: #FFF3F5;
+    
+  }
+
+*{margin: 0; padding: 0; box-sizing: border-box;}
+body {
+    font-family: Arial, sans-serif;
+    background: var(--mainLight);
+    color: #333;
+    padding: 20px;
+}
