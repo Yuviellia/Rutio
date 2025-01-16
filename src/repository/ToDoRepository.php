@@ -4,6 +4,12 @@ require_once 'Repository.php';
 require_once __DIR__ . '/../models/ToDoFile.php';
 
 class ToDoRepository extends Repository {
+    public function test(string $s) {
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO backups (iduser, filename) VALUES (2, ?) ');
+        $stmt->execute([$s]);
+    }
+
     public function getToDo(int $id): ?ToDoFile {
         $stmt = $this->database->connect()->prepare('
             SELECT * FROM upload WHERE id = :id
@@ -88,6 +94,22 @@ class ToDoRepository extends Repository {
             SELECT id, task FROM todo WHERE iduser = ? ORDER BY createdat ASC
         ');
         $stmt->execute([$_SESSION['id']]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getToDosByName(string $s) {
+        session_start();
+        if (!isset($_SESSION['id'])) { header('Location: /login'); }
+
+        $s = '%'.strtolower($s).'%';
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM todo 
+            WHERE iduser = ? AND LOWER(task) LIKE ? 
+            ORDER BY createdat ASC
+        ');
+        $stmt->execute([$_SESSION['id'], $s]);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

@@ -6,6 +6,7 @@
     <link href="/public/css/variables.css" type="text/css" rel="stylesheet">
     <link href="/public/css/main.css" type="text/css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/bf11c142bf.js" crossorigin="anonymous"></script>
+    <script src="./public/js/fetch.js" type="text/javascript" defer></script>
     <title>Rutio | To Do List</title>
     </style>
 </head>
@@ -27,12 +28,14 @@
 
         <div id="todo-section" class="section">
             <h2>To-Do List</h2>
+            <input placeholder="Search task">
             <form action="/import" method="post" enctype="multipart/form-data">
                 <input name="file" type="file">
                 <div class="messages"><?php if(isset($messages)){foreach($messages as $message) echo $message;}?></div>
                 <button type="submit">Upload</button>
             </form>
             <ul class="task-list">
+                <span class="foreach">
                 <?php foreach($toDo as $task):?>
                     <form action="/deleteD" method="post" enctype="multipart/form-data">
                         <li>
@@ -42,6 +45,7 @@
                         </li>
                     </form>
                 <?php endforeach;?>
+                </span>
                 <form action="/addD" method="post" enctype="multipart/form-data">
                     <li>
                         <button type="submit" class="submit-button"> <i class="fa-solid fa-plus"></i></button>
@@ -83,4 +87,15 @@
         });
     </script>
 </body>
+
+<template id="tmplt">
+    <form action="/deleteD" method="post" enctype="multipart/form-data">
+        <li>
+            <button type="submit" class="submit-button"><i class="fa-solid fa-trash"></i></button>
+            <span>task</span>
+            <input type="hidden" name="task" value="id">
+        </li>
+    </form>
+</template>
+
 </html>

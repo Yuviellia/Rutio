@@ -39,6 +39,24 @@ class ToDoController extends AppController {
         $toDos = $this->toDoRepository->getToDos();
         return $this->render("todo", ['messages' => $this->messages, 'toDo' => $toDos]);
     }
+
+    public function search() {
+        session_start();
+        if (!isset($_SESSION['id'])) { header('Location: /login'); }
+
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+
+            echo json_encode($this->toDoRepository->getToDosByName($decoded['search']));
+        }
+    }
+
     public function addD() {
         if($this->isPost()){
             $this->toDoRepository->addSingleToDo($_POST['task']);
@@ -52,7 +70,7 @@ class ToDoController extends AppController {
         header("Location: /todo");
     }
 
-    public function validate(array $file): bool {
+    private function validate(array $file): bool {
         if($file['size'] > self::MAX_FILE_SIZE) {
             $this->messages[] = 'File too large';
             return false;

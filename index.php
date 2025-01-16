@@ -18,5 +18,6 @@ Routing::post('addG', 'TagController');
 Routing::post('deleteG', 'TagController');
 Routing::post('mark', 'TagController');
 Routing::post('unmark', 'TagController');
+Routing::post('search', 'ToDoController');
 
 Routing::run($path);
