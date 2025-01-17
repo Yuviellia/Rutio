@@ -60,6 +60,7 @@ class SecurityController extends AppController{
 
         session_start();
         $_SESSION['id'] = $userRepository->getUser($email)->getId();
+
         header('Location: /dashboard');
         exit();
     }

@@ -6,6 +6,7 @@
     <link href="/public/css/variables.css" type="text/css" rel="stylesheet">
     <link href="/public/css/main.css" type="text/css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/bf11c142bf.js" crossorigin="anonymous"></script>
+    <script src="./public/js/clock.js" type="text/javascript" defer></script>
     <title>Rutio | Dashboard</title>
     </style>
 </head>
@@ -33,11 +34,11 @@
             $startDate->modify('monday this week');
             ?>
 
-            <p>
+            <h3>
                 <a href="/dashboard?startDate=<?=(clone $startDate)->modify('-1 week')->format('Y-m-d')?>">&lt;</a>
                 <?=$startDate->format('Y-m-d')?>
                 <a href="/dashboard?startDate=<?=(clone $startDate)->modify('+1 week')->format('Y-m-d')?>">&gt;</a>
-            </p>
+            </h3>
             <table>
                 <tr>
                     <th style="width: 42%;">Task</th>
@@ -50,7 +51,7 @@
                     <th style="width: 6%;">Sun</th>
                     <th style="width: 16%;">Progress</th>
                 </tr>
-                <?php foreach($tags as $tag):?>
+                <?php if(isset($tags)) {foreach($tags as $tag):?>
                     <tr>
                         <td>
                             <div class="task-cell">
@@ -98,36 +99,24 @@
                             </div>
                         </td>
                     </tr>
-                <?php endforeach;?>
+                <?php endforeach; }?>
                 <tr>
                     <td>
                         <div class="task-cell">
                             <form action="/addG" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="startDate" value="<?= htmlspecialchars($startDate->format('Y-m-d')) ?>">
-                                <span><input name="tag" type="text" placeholder="Add a new tag..." class="task-input"></span>
-                                <button type="submit" class="submit-button"><i class="fa-solid fa-plus"></i></button>
+                                <div class="add-container">
+                                    <input type="hidden" name="startDate" value="<?= htmlspecialchars($startDate->format('Y-m-d')) ?>">
+                                    <span><input name="tag" type="text" placeholder="Add a new tag..." class="task-input"></span>
+                                    <button type="submit" class="submit-button"><i class="fa-solid fa-plus"></i></button>
+                                </div>
                             </form>
                         </div>
                     </td>
-                    <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                    <td><div class="progress"></div></td>
+                    <td></td> <td></td> <td></td> <td></td>
+                    <td></td> <td></td> <td></td> <td></td>
                 </tr>
             </table>
         </div>
     </div>
-    <script>
-        function updateClock() {
-            const now = new Date();
-            let hours = now.getHours();
-            const minutes = now.getMinutes();
-            const period = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12;
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('period').textContent = period;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
 </body>
 </html>

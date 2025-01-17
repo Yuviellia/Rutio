@@ -24,7 +24,7 @@ class ToDoController extends AppController {
         }
 
         $toDo = $this->toDoRepository->getToDos();
-        $this->render('todo', ['toDo' => $toDo]);
+        $this->render('todo', ['messages' => null, 'toDo' => $toDo]);
     }
 
     public function import() {

@@ -54,25 +54,22 @@ class TagRepository extends Repository {
 
     public function mark($id, $date): void {
         session_start();
-        if (!isset($_SESSION['id'])) { header('Location: /login'); }
+        if (!isset($_SESSION['id'])) {
+            header('Location: /login');
+            exit();
+        }
+
 
         $stmt = $this->database->connect()->prepare('
-            SELECT 1
-            FROM tags
-            WHERE id = ? AND iduser = ?
+            INSERT INTO marked (idtag, date)
+            SELECT t.id, ?
+            FROM tags t
+            INNER JOIN users u ON t.iduser = u.id
+            WHERE t.id = ? AND u.id = ?
         ');
 
         $user = $_SESSION['id'];
-        $stmt->execute([$id, $user]);
-
-        if ($stmt->rowCount() > 0) {
-            $stmt = $this->database->connect()->prepare('
-            INSERT INTO marked (idtag, date)
-            VALUES (?, ?)
-        ');
-
-            $stmt->execute([$id, $date]);
-        }
+        $stmt->execute([$date, $id, $user]);
     }
 
     public function unmark($id, $date): void {
