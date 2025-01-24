@@ -7,6 +7,9 @@ body {
     padding: 0;
 }
 
+h1{
+    color: var(--grayDark);
+}
 .task-list {
     list-style-type: none;
     padding: 0;
@@ -17,9 +20,11 @@ body {
     margin: 10px 0;
     position: relative;
     padding: 10px 0;
+    overflow: hidden;
+    width: 100%;
 }
 
-.task-item span {
+.task-list span {
     width: 100%;
     padding-left: 20px;
 }
@@ -27,42 +32,47 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 table tr td {
     position: relative;
+    word-wrap: break-word;
 }
-
-.task-cell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+.task-cell{
+    overflow: hidden;
 }
-
 .task-cell span {
     text-align: center;
     width: 100%;
 }
 
-.fa-trash {
-    transition: color 0.3s ease;
+.submit-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
     position: absolute;
     left: 10px;
+}
+
+.fa-trash, .fa-plus  {
+    position: relative;
+    left: 0;
     color: var(--accent);
-    cursor: pointer;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
-
-.fa-trash:hover {
+.fa-plus {
+    opacity: 1;
+}
+.fa-trash:hover, .fa-plus:hover  {
     color: var(--accentDark);
 }
 
-table tr:hover .fa-trash, .task-list li:hover .fa-trash{
+table tr:hover .fa-trash, .task-list li:hover .fa-trash, table tr:hover .fa-plus, .task-list li:hover .fa-plus{
     opacity: 1;
 }
-
 .container {
     max-width: 900px;
     margin: auto;
@@ -87,6 +97,20 @@ table tr:hover .fa-trash, .task-list li:hover .fa-trash{
 
 .navbar a:hover {
     color: var(--accent);
+}
+h3{
+    text-align: center;
+    margin-top: 25px;
+}
+#habit-table-section a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 1.4em;
+}
+
+#habit-table-section a:hover {
+    color: var(--accentDark);
 }
 
 .section {
@@ -113,7 +137,6 @@ table tr:hover .fa-trash, .task-list li:hover .fa-trash{
     font-size: 2.5em;
     font-weight: 500;
     color: var(--grayDark);
-    /*mask-image: url("../image/grit.png");*/
 }
 
 .task-list {
@@ -130,7 +153,6 @@ table tr:hover .fa-trash, .task-list li:hover .fa-trash{
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 25px;
 }
 
 table, th {
@@ -188,3 +210,152 @@ input[type="checkbox"]:checked {
     background: var(--accent);
     border-color: var(--accent);
 }
+
+
+input.search {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 1em;
+    outline: none;
+}
+
+input.search:focus {
+    border-color: var(--accent);
+}
+
+
+
+
+
+/* Container for the search, file input, and button */
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; /* Adds space between items */
+}
+
+/* Styling the search input */
+input.search {
+    width: 50%;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 1em;
+    outline: none;
+}
+
+input.search:focus {
+    border-color: var(--accent);
+}
+
+/* Styling for the file input wrapper */
+.file-input-wrapper {
+    position: relative;
+    width: 60%;
+}
+
+.input-container form {
+    position: relative;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-input-wrapper input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-input-wrapper label {
+    display: block;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: white;
+    font-size: 1em;
+    text-align: center;
+    color: var(--grayDark);
+    cursor: pointer;
+    width: 100%;
+}
+
+.file-input-wrapper input[type="file"]:focus + label {
+    border-color: var(--accent);
+}
+
+/* Styling for the file submit button */
+.file-submit {
+    width: 40%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--accent);
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.file-submit:hover {
+    background: var(--accentDark);
+}
+
+.file-submit:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+
+
+
+
+.add-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    line-height: 1.5em;
+    height: 40px;
+}
+
+.task-input {
+    position: absolute;
+    top: 7px;
+    left: 30px;
+    border: none;
+    background: none;
+    color: transparent;
+    font-size: inherit;
+    line-height: inherit;
+    width: 100%;
+    padding: 0;
+    z-index: 1;
+    caret-color: black;
+}
+
+.add-container:hover .task-input {
+    color: black;
+}
+
+.add-container .task-input:focus {
+    outline: none;
+    color: black;
+}
+
+.task-input::placeholder {
+    color: var(--grayDark);
+    opacity: 0.7;
+}
+

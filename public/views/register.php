@@ -30,7 +30,7 @@
     </form>
 
     <div class="footer">
-        <p>Already have an account? <a href="/login">Sign up</a></p>
+        <p>Already have an account? <a href="/login">Sign in</a></p>
     </div>
 </div>
 </body>

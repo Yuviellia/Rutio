@@ -11,6 +11,11 @@ class TagController extends AppController {
     }
 
     public function dashboard() {
+        session_start();
+        if (!isset($_SESSION['id'])) {
+            header('Location: /login');
+            exit();
+        }
 
         $tags = $this->tagRepository->getTags();
         $marks = [];
