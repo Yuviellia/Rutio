@@ -9,6 +9,7 @@ Routing::get('index', 'DefaultController');
 Routing::get('dashboard', 'TagController');
 Routing::get('todo', 'ToDoController');
 Routing::post('login', 'SecurityController');
+Routing::post('logout', 'SecurityController');
 Routing::post('register', 'SecurityController');
 Routing::post('import', 'ToDoController');
 Routing::post('addD', 'ToDoController');
@@ -17,5 +18,6 @@ Routing::post('addG', 'TagController');
 Routing::post('deleteG', 'TagController');
 Routing::post('mark', 'TagController');
 Routing::post('unmark', 'TagController');
+Routing::post('search', 'ToDoController');
 
 Routing::run($path);

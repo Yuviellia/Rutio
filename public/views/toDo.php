@@ -6,16 +6,16 @@
     <link href="/public/css/variables.css" type="text/css" rel="stylesheet">
     <link href="/public/css/main.css" type="text/css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/bf11c142bf.js" crossorigin="anonymous"></script>
-    <title>Rutio | Dashboard</title>
+    <script src="./public/js/fetch.js" type="text/javascript" defer></script>
+    <title>Rutio | To Do List</title>
     </style>
 </head>
 <body>
     <div class="container">
         <nav class="navbar">
             <a href="/todo">To Do List</a>
-            <a href="/stats">Stats</a>
             <a href="/dashboard">Habit Tracker</a>
-            <a href="">Logout</a>
+            <a href="/logout">Logout</a>
         </nav>
 
         <div id="header" class="section">
@@ -26,14 +26,21 @@
         </div>
 
         <div id="todo-section" class="section">
-            <h2>To-Do List</h2>
-            <form action="/import" method="post" enctype="multipart/form-data">
-                <input name="file" type="file">
-                <div class="messages"><?php if(isset($messages)){foreach($messages as $message) echo $message;}?></div>
-                <button type="submit">Upload</button>
-            </form>
+            <h2>To-Do List</h2><br>
+            <div class="input-container">
+                <input placeholder="Search task" class="search">
+                <form action="/import" method="post" enctype="multipart/form-data">
+                    <div class="file-input-wrapper">
+                        <input name="file" type="file" class="file-choice" id="file-input" />
+                        <label for="file-input" class="file-placeholder"><?php if(!empty($messages)){foreach($messages as $message) echo $message;} else echo "Choose a file..."?></label>
+                    </div>
+                    <div class="messages"></div>
+                    <button type="submit" class="file-submit">Upload</button>
+                </form>
+            </div>
             <ul class="task-list">
-                <?php foreach($toDo as $task):?>
+                <span class="foreach">
+                <?php if(isset($toDo)){foreach($toDo as $task):?>
                     <form action="/deleteD" method="post" enctype="multipart/form-data">
                         <li>
                             <button type="submit" class="submit-button"><i class="fa-solid fa-trash"></i></button>
@@ -41,9 +48,10 @@
                             <input type="hidden" name="task" value="<?= htmlspecialchars($task["id"]) ?>">
                         </li>
                     </form>
-                <?php endforeach;?>
+                <?php endforeach;}?>
+                </span>
                 <form action="/addD" method="post" enctype="multipart/form-data">
-                    <li>
+                    <li class="add-container">
                         <button type="submit" class="submit-button"> <i class="fa-solid fa-plus"></i></button>
                         <span><input name="task" type="text" placeholder="Add a new task..." class="task-input"></span>
                     </li>
@@ -51,36 +59,16 @@
             </ul>
         </div>
     </div>
-
-    <script>
-        function updateClock() {
-            const now = new Date();
-            let hours = now.getHours();
-            const minutes = now.getMinutes();
-            const period = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12;
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('period').textContent = period;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        function updateProgressBar(row) {
-            const checkboxes = row.querySelectorAll('input[class^="check-"]');
-            const progressBar = row.querySelector('.progress-bar');
-            const totalDays = checkboxes.length;
-            const checkedDays = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
-            const percentage = (checkedDays / totalDays) * 100;
-            progressBar.style.width = percentage + '%';
-        }
-
-        document.querySelectorAll('table tr').forEach(row => {
-            const checkboxes = row.querySelectorAll('input[class^="check-"]');
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', () => updateProgressBar(row));
-            });
-        });
-    </script>
 </body>
+
+<template id="tmplt">
+    <form action="/deleteD" method="post" enctype="multipart/form-data">
+        <li>
+            <button type="submit" class="submit-button"><i class="fa-solid fa-trash"></i></button>
+            <span>task</span>
+            <input type="hidden" name="task" value="id">
+        </li>
+    </form>
+</template>
+
 </html>

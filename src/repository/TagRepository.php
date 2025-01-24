@@ -3,10 +3,13 @@ require_once 'Repository.php';
 
 class TagRepository extends Repository {
     public function getTags(): array {
+        session_start();
+        if (!isset($_SESSION['id'])) { header('Location: /login'); }
+
         $stmt = $this->database->connect()->prepare('
             SELECT id, name FROM tags WHERE iduser = ? ORDER BY createdat ASC
         ');
-        $stmt->execute([1]);
+        $stmt->execute([$_SESSION['id']]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -19,12 +22,15 @@ class TagRepository extends Repository {
     }
 
     public function addTag($f): void {
+        session_start();
+        if (!isset($_SESSION['id'])) { header('Location: /login'); }
+
         $stmt = $this->database->connect()->prepare('
             INSERT INTO tags (iduser, name, createdat)
             VALUES (?, ?, ?)
         ');
 
-        $user = 1;
+        $user = $_SESSION['id'];
         $currentDate = date('Y-m-d H:i:s');
         $line = trim($f);
         if (!empty($line)) {
@@ -33,44 +39,50 @@ class TagRepository extends Repository {
     }
 
     public function deleteTag($f): void {
+        session_start();
+        if (!isset($_SESSION['id'])) { header('Location: /login'); }
+
         $stmt = $this->database->connect()->prepare('
             DELETE FROM tags
             WHERE id = ? AND iduser = ?
         ');
 
-        $user = 1;
+        $user = $_SESSION['id'];
 
         $stmt->execute([$f, $user]);
     }
 
     public function mark($id, $date): void {
-        $stmt = $this->database->connect()->prepare('
-            SELECT 1
-            FROM tags
-            WHERE id = ? AND iduser = ?
-        ');
-
-        $user = 1;
-        $stmt->execute([$id, $user]);
-
-        if ($stmt->rowCount() > 0) {
-            $stmt = $this->database->connect()->prepare('
-            INSERT INTO marked (idtag, date)
-            VALUES (?, ?)
-        ');
-
-            $stmt->execute([$id, $date]);
+        session_start();
+        if (!isset($_SESSION['id'])) {
+            header('Location: /login');
+            exit();
         }
+
+
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO marked (idtag, date)
+            SELECT t.id, ?
+            FROM tags t
+            INNER JOIN users u ON t.iduser = u.id
+            WHERE t.id = ? AND u.id = ?
+        ');
+
+        $user = $_SESSION['id'];
+        $stmt->execute([$date, $id, $user]);
     }
 
     public function unmark($id, $date): void {
+        session_start();
+        if (!isset($_SESSION['id'])) { header('Location: /login'); }
+
         $stmt = $this->database->connect()->prepare('
             SELECT 1
             FROM user_tag_marked
             WHERE idtag = ? AND iduser = ?
         ');
 
-        $user = 1;
+        $user = $_SESSION['id'];
         $stmt->execute([$id, $user]);
 
         if ($stmt->rowCount() > 0) {
