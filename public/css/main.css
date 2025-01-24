@@ -382,6 +382,7 @@ input.search:focus {
     .input-container form { width: 100%; }
     .file-submit { width: 40%; }
 }
+
 @media screen and (max-width: 523px){
     .section { padding-left: 10px; padding-right: 10px;}
 }

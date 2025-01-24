@@ -51,4 +51,5 @@ class UserRepository extends Repository {
             $pdo->rollBack();
         }
     }
+
 }

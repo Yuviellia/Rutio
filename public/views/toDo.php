@@ -7,6 +7,7 @@
     <link href="/public/css/main.css" type="text/css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/bf11c142bf.js" crossorigin="anonymous"></script>
     <script src="./public/js/fetch.js" type="text/javascript" defer></script>
+    <script src="./public/js/clock.js" type="text/javascript" defer></script>
     <title>Rutio | To Do List</title>
     </style>
 </head>
