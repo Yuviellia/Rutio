@@ -27,7 +27,7 @@
         </div>
 
         <div id="todo-section" class="section">
-            <h2>To-Do List</h2><br>
+            <h2>To Do List</h2><br>
             <div class="input-container">
                 <input placeholder="Search task" class="search">
                 <form action="/import" method="post" enctype="multipart/form-data">
