@@ -105,7 +105,7 @@
                             <form action="/addG" method="post" enctype="multipart/form-data">
                                 <div class="add-container">
                                     <input type="hidden" name="startDate" value="<?= htmlspecialchars($startDate->format('Y-m-d')) ?>">
-                                    <span><input name="tag" type="text" placeholder="Add a new tag..." class="task-input"></span>
+                                    <span><input name="tag" type="text" placeholder="Add a new task..." class="task-input"></span>
                                     <button type="submit" class="submit-button"><i class="fa-solid fa-plus"></i></button>
                                 </div>
                             </form>
