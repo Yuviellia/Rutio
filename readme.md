@@ -62,9 +62,10 @@ Ekran listy zadań, który umożliwia tworzenie, edytowanie i usuwanie zadań. L
     - W konsoli użyć polecenia `git clone https://github.com/Yuviellia/Rutio.git`
     - Przejść do katalogu poleceniem `cd Rutio`
 2. Uruchomienie aplikacji
+    - Upewnić się że włączony jest docker
     - Uruchomić poleceniem `docker-compose up --build`
     - W przeglądarce wejść na `localhost:8080`
-3. Po uruchomieniu można się zalogować przykładowymi danymi:
+4. Po uruchomieniu można się zalogować przykładowymi danymi:
     - Email: `j@j.j`, hasło: `j`
     - Email: `h@h.h`, hasło: `h`
 
