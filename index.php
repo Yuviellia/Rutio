@@ -4,6 +4,7 @@ require 'Routing.php';
 
 $path = trim($_SERVER['REQUEST_URI'], '/');
 $path = parse_url($path, PHP_URL_PATH);
+if ($path === '') { $path = 'login'; }
 
 Routing::get('index', 'DefaultController');
 Routing::get('dashboard', 'TagController');

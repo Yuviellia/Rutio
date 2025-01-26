@@ -227,3 +227,10 @@ INSERT INTO todo (id, iduser, task, createdat) VALUES (12, 2, 'SERVER MAINTENANC
 INSERT INTO todo (id, iduser, task, createdat) VALUES (13, 2, 'Send that card finally', '2025-01-25 16:00:38.000000');
 INSERT INTO todo (id, iduser, task, createdat) VALUES (14, 2, 'Buy cable', '2025-01-25 16:01:07.000000');
 INSERT INTO todo (id, iduser, task, createdat) VALUES (16, 2, 'GRIND RANKED', '2025-01-25 16:02:23.000000');
+
+
+SELECT setval('userdetails_id_seq', (SELECT MAX(id) FROM user_details), true);
+SELECT setval('"User_id_seq"', (SELECT MAX(id) FROM users), true);
+SELECT setval('tagsmarked_id_seq', (SELECT MAX(id) FROM marked), true);
+SELECT setval('tags_id_seq', (SELECT MAX(id) FROM tags), true);
+SELECT setval('todo_id_seq', (SELECT MAX(id) FROM todo), true);
